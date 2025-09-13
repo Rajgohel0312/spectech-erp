@@ -1,6 +1,6 @@
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { FaSearch, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,49 +11,58 @@ export default function Topbar({ sidebarOpen, setSidebarOpen }) {
   const crumbs = location.pathname.split("/").filter((c) => c);
 
   return (
-    <header className="flex items-center justify-between bg-[var(--background-color)] px-6 py-3 shadow-md">
-      {/* Mobile Hamburger */}
-      <button
-        className="md:hidden text-[var(--text-color)]"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        <HiMiniBars3BottomLeft className="w-6 h-6" />
-      </button>
+    <header className="flex items-center justify-between bg-white px-6 py-3 border-b border-gray-200">
+      {/* Left side: Hamburger + Page Info */}
+      <div className="flex items-center gap-4">
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden text-gray-600 hover:text-[var(--primary-color)] transition"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <HiMiniBars3BottomLeft className="w-6 h-6" />
+        </button>
 
-      {/* Breadcrumbs + Title */}
-      <div className="flex flex-col">
-        <h1 className="text-lg font-semibold text-[var(--text-color)]">
-          {crumbs[crumbs.length - 1] || "Dashboard"}
-        </h1>
-        <div className="text-xs text-gray-500">
-          Home {crumbs.map((c, i) => ` / ${c}`)}
+        {/* Title + Breadcrumbs */}
+        <div>
+          <h1 className="text-xl font-semibold text-[var(--text-color,#111827)] tracking-tight capitalize">
+            {crumbs[crumbs.length - 1] || "Dashboard"}
+          </h1>
+          <nav className="flex items-center text-xs text-gray-400 space-x-1 mt-0.5">
+            <span>Home</span>
+            {crumbs.map((c, i) => (
+              <span key={i} className="flex items-center space-x-1 capitalize">
+                <span>/</span>
+                <span>{c}</span>
+              </span>
+            ))}
+          </nav>
         </div>
-        <span className="text-xs text-gray-500">
-          Logged in as <strong>Store Manager</strong>
-        </span>
       </div>
 
-      {/* Right actions */}
-      <div className="flex items-center gap-6">
+      {/* Right side: Actions */}
+      <div className="flex items-center gap-5 relative">
         {/* Notifications */}
         <div className="relative">
-          <button onClick={() => setNotifOpen(!notifOpen)}>
-            <IoNotificationsOutline className="text-xl text-gray-600" />
-            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+          <button
+            onClick={() => setNotifOpen(!notifOpen)}
+            className="relative text-gray-600 hover:text-[var(--primary-color)] transition"
+          >
+            <IoNotificationsOutline className="text-xl" />
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-medium px-1.5 rounded-full">
               3
             </span>
           </button>
           {notifOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-20">
-              <p className="px-4 py-2 text-sm font-semibold border-b">
+            <div className="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-100 z-20 animate-fadeIn">
+              <p className="px-4 py-2 text-sm font-medium text-gray-700 border-b">
                 Notifications
               </p>
-              <div className="max-h-40 overflow-y-auto">
-                <p className="px-4 py-2 text-sm hover:bg-gray-100">
-                  New issue created
+              <div className="max-h-52 overflow-y-auto divide-y">
+                <p className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 cursor-pointer">
+                  ✅ New issue created
                 </p>
-                <p className="px-4 py-2 text-sm hover:bg-gray-100">
-                  Stock updated
+                <p className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 cursor-pointer">
+                  📦 Stock updated successfully
                 </p>
               </div>
             </div>
@@ -63,32 +72,32 @@ export default function Topbar({ sidebarOpen, setSidebarOpen }) {
         {/* Profile */}
         <div className="relative">
           <button
-            className="flex items-center space-x-2"
+            className="flex items-center gap-2 focus:outline-none"
             onClick={() => setProfileOpen(!profileOpen)}
           >
             <img
               src="https://i.pravatar.cc/40"
               alt="User Avatar"
-              className="w-8 h-8 rounded-full border-2 border-[var(--primary-color)]"
+              className="w-8 h-8 rounded-full border border-gray-200"
             />
-            <span className="text-sm font-medium text-[var(--text-color)] hidden md:inline">
+            <span className="text-sm font-medium text-gray-700 hidden md:inline">
               Raj
             </span>
           </button>
 
           {profileOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-20">
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-20 animate-fadeIn">
               <Link
                 to="/profile"
-                className="block px-4 py-2 text-sm hover:bg-gray-100"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition"
               >
-                <FaUserCircle className="inline mr-2" /> Profile
+                <FaUserCircle className="text-gray-500" /> Profile
               </Link>
               <button
                 onClick={() => alert("Logging out...")}
-                className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100"
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition"
               >
-                <FaSignOutAlt className="inline mr-2" /> Logout
+                <FaSignOutAlt /> Logout
               </button>
             </div>
           )}
