@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import StatCard from "../components/StatCard/StatCard";
+import StatCard from "../../components/StatCard/StatCard";
 
 const data = [
   { name: "Dept A", value: 40 },

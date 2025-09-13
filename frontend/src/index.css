@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "react-toastify/dist/ReactToastify.css";
+
 :root {
   --primary-color: #488389; /* Blue */
   --secondary-color: #cadbdd; /* Green */
