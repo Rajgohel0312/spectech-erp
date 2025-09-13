@@ -4,13 +4,14 @@
 
 <div align="center">
 
-# 🎓 College ERP System  
-*A modern ERP solution for digitalizing college operations.*  
+# 🎓 College ERP System
+
+_A modern ERP solution for digitalizing college operations._
 
 ![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Frontend](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61dafb?logo=react&logoColor=white) 
-![Backend](https://img.shields.io/badge/Backend-Laravel-red?logo=laravel) 
+![License](https://img.shields.io/badge/License-Proprietary-red)
+![Frontend](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61dafb?logo=react&logoColor=white)
+![Backend](https://img.shields.io/badge/Backend-Laravel-red?logo=laravel)
 ![Database](https://img.shields.io/badge/Database-MySQL-blue?logo=mysql)
 
 </div>
@@ -18,50 +19,58 @@
 ---
 
 The **College ERP System** is being developed by **SPEC TECH IT SOLUTIONS** to digitalize and streamline college operations.  
-It aims to provide an all-in-one solution for managing **inventory, academics, administration, and labs** with a modern and minimal user experience.  
+It aims to provide an all-in-one solution for managing **inventory, academics, administration, and labs** with a modern and minimal user experience.
 
 ---
 
 ## ✨ Features
 
-| Status | Module | Key Features |
-|--------|---------|--------------|
-| ✅ Implemented | 📦 **Store Module** | Product Master (filters, sorting, CRUD), Issued History with role-based fields, **Purchase Order (auto-creation & detail entry)**, role-based access, search & pagination |
-| 🚧 Planned | 🧾 Academic Management | Students, courses, exams |
-| 🚧 Planned | 💰 Finance & Fees | Student fees, finance records |
-| 🚧 Planned | 👨‍🏫 HR & Staff | Staff records, payroll |
-| 🚧 Planned | 📊 Attendance | Attendance tracking & student portal |
-| 🚧 Planned | 🔐 Authentication | Role-based login system |
-| 🚧 Planned | 📑 Reports & Exports | PDF/Excel reports with filters |
+| Status         | Module                 | Key Features                                                                                                                                                              |
+| -------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ Implemented | 📦 **Store Module**    | Product Master (filters, sorting, CRUD), Issued History with role-based fields, **Purchase Order (auto-creation & detail entry)**, role-based access, search & pagination |
+| 🚧 Planned     | 🧾 Academic Management | Students, courses, exams                                                                                                                                                  |
+| 🚧 Planned     | 💰 Finance & Fees      | Student fees, finance records                                                                                                                                             |
+| 🚧 Planned     | 👨‍🏫 HR & Staff          | Staff records, payroll                                                                                                                                                    |
+| 🚧 Planned     | 📊 Attendance          | Attendance tracking & student portal                                                                                                                                      |
+| 🚧 Planned     | 🔐 Authentication      | Role-based login system                                                                                                                                                   |
+| 🚧 Planned     | 📑 Reports & Exports   | PDF/Excel reports with filters                                                                                                                                            |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] ✅ Store Module – Product Master, Issued History, **PO Module (auto-creation & details)**  
-- [ ] 🧾 Academic Management (students, courses, exams)  
-- [ ] 💰 Finance & Fees Module  
-- [ ] 👨‍🏫 HR & Staff Management  
-- [ ] 📊 Attendance & Student Portal  
-- [ ] 🔐 Authentication & Role-based login  
-- [ ] 📑 Report exports (PDF/Excel with filters)  
+- [x] ✅ Store Module – Product Master, Issued History, **PO Module (auto-creation & details)**
+- [ ] 🧾 Academic Management (students, courses, exams)
+- [ ] 💰 Finance & Fees Module
+- [ ] 👨‍🏫 HR & Staff Management
+- [ ] 📊 Attendance & Student Portal
+- [ ] 🔐 Authentication & Role-based login
+- [ ] 📑 Report exports (PDF/Excel with filters)
 
 ---
 
 ## 🛠️ Tech Stack
-- ⚛️ **Frontend:** React + Vite, TailwindCSS  
-- 🖥️ **Backend:** Laravel (API)  
-- 🗄️ **Database:** MySQL  
-- 🎨 **UI Libraries:** React Icons, Headless UI  
+
+- ⚛️ **Frontend:** React + Vite, TailwindCSS
+- 🖥️ **Backend:** Laravel (API)
+- 🗄️ **Database:** MySQL
+- 🎨 **UI Libraries:** React Icons, Headless UI
+
+---
+
+## 🔒 License
+
+This software is **proprietary** and developed by **SPEC TECH IT SOLUTIONS PVT LTD**.  
+It is **not open source** and cannot be copied, modified, or distributed without prior written permission.
 
 ---
 
 ## 🌟 Vision
 
-> ✨ *"This is not just software, it's a step towards digital transformation in education."* 🚀  
+> ✨ _"This is not just software, it's a step towards digital transformation in education."_ 🚀
 >
 > The College ERP System is in **active development** and will continue to evolve with more modules and features.  
 > Our goal is to build a **unified, modern, and scalable ERP platform** that empowers colleges to manage everything  
-> from academics to administration with ease.  
+> from academics to administration with ease.
 
 ---
