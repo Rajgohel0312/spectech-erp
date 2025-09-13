@@ -5,7 +5,6 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductMaster from "./pages/ProductMaster/ProductMaster";
 import IssuedHistory from "./pages/IssuedHistory/IssuedHistory";
 import PurchaseOrders from "./pages/Store/PurchaseOrders";
-import TestPO from "./components/Store/TestPo";
 
 function App() {
   return (
