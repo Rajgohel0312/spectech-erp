@@ -60,16 +60,6 @@ export default function Topbar({ sidebarOpen, setSidebarOpen }) {
           )}
         </div>
 
-        {/* Search */}
-        <div className="relative hidden sm:block w-52">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
-          />
-          <FaSearch className="absolute left-3 top-2.5 text-gray-400" />
-        </div>
-
         {/* Profile */}
         <div className="relative">
           <button
