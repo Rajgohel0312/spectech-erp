@@ -1,4 +1,9 @@
-import { FaTachometerAlt, FaFlask, FaHistory } from "react-icons/fa";
+import {
+  FaTachometerAlt,
+  FaFlask,
+  FaHistory,
+  FaFileInvoice,
+} from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 
 export const menuConfig = [
@@ -11,8 +16,14 @@ export const menuConfig = [
     links: [
       { path: "/product-master", label: "Product Master", icon: <FaFlask /> },
       { path: "/issue-history", label: "Issue History", icon: <FaHistory /> },
+      {
+        path: "/store/purchase-orders",
+        label: "Purchase Order",
+        icon: <FaFileInvoice />,
+      },
     ],
   },
+
   {
     section: "Settings",
     links: [

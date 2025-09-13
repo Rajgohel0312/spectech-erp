@@ -3,8 +3,13 @@ import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi2";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { menuConfig } from "../../config/menuConfig";
-
-export default function Sidebar({ sidebarOpen, setSidebarOpen, collapsed, setCollapsed }) {
+import logo from "/logo.png";
+export default function Sidebar({
+  sidebarOpen,
+  setSidebarOpen,
+  collapsed,
+  setCollapsed,
+}) {
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
@@ -19,9 +24,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, collapsed, setCol
     >
       {/* Sidebar Header */}
       <div className="flex items-center justify-between p-3 border-b border-gray-200">
-        {!collapsed && (
-          <span className="font-bold text-[var(--text-color)]">Spectech</span>
-        )}
+        {!collapsed && <img className="h-16" src={logo} alt="" srcset="" />}
 
         {/* Mobile close */}
         <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
@@ -57,9 +60,10 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, collapsed, setCol
                   to={link.path}
                   onClick={() => setSidebarOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg relative transition-all duration-200
-                    ${isActive(link.path)
-                      ? "bg-[var(--primary-color)] text-white"
-                      : "hover:bg-[var(--primary-color)] hover:text-white"
+                    ${
+                      isActive(link.path)
+                        ? "bg-[var(--primary-color)] text-white"
+                        : "hover:bg-[var(--primary-color)] hover:text-white"
                     }`}
                   title={collapsed ? link.label : ""}
                 >
