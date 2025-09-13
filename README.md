@@ -26,7 +26,7 @@ It aims to provide an all-in-one solution for managing **inventory, academics, a
 
 | Status | Module | Key Features |
 |--------|---------|--------------|
-| ✅ Implemented | 📦 **Store Module** | Product Master (filters, sorting, CRUD), Issued History with role-based fields, role-based access, search & pagination |
+| ✅ Implemented | 📦 **Store Module** | Product Master (filters, sorting, CRUD), Issued History with role-based fields, **Purchase Order (auto-creation & detail entry)**, role-based access, search & pagination |
 | 🚧 Planned | 🧾 Academic Management | Students, courses, exams |
 | 🚧 Planned | 💰 Finance & Fees | Student fees, finance records |
 | 🚧 Planned | 👨‍🏫 HR & Staff | Staff records, payroll |
@@ -38,7 +38,7 @@ It aims to provide an all-in-one solution for managing **inventory, academics, a
 
 ## 🗺️ Roadmap
 
-- [x] ✅ Store Module – Product Master & Issued History  
+- [x] ✅ Store Module – Product Master, Issued History, **PO Module (auto-creation & details)**  
 - [ ] 🧾 Academic Management (students, courses, exams)  
 - [ ] 💰 Finance & Fees Module  
 - [ ] 👨‍🏫 HR & Staff Management  
