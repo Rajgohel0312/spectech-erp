@@ -18,31 +18,36 @@ _A modern ERP solution for digitalizing college operations._
 
 ---
 
-The **College ERP System** is being developed by **SPEC TECH IT SOLUTIONS** to digitalize and streamline college operations.  
-It aims to provide an all-in-one solution for managing **inventory, academics, administration, and labs** with a modern and minimal user experience.
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [🗺️ Roadmap](#️-roadmap)
+- [🛠️ Tech Stack](#-tech-stack)
+- [🔒 License](#-license)
+- [🌟 Vision](#-vision)
 
 ---
 
 ## ✨ Features
 
-| Status         | Module                 | Key Features                                                                                                                                                              |
-| -------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ✅ Implemented | 📦 **Store Module**    | Product Master (filters, sorting, CRUD), Issued History with role-based fields, **Purchase Order (auto-creation & detail entry)**, role-based access, search & pagination |
-| 🚧 Planned     | 🧾 Academic Management | Students, courses, exams                                                                                                                                                  |
-| 🚧 Planned     | 💰 Finance & Fees      | Student fees, finance records                                                                                                                                             |
-| 🚧 Planned     | 👨‍🏫 HR & Staff          | Staff records, payroll                                                                                                                                                    |
-| 🚧 Planned     | 📊 Attendance          | Attendance tracking & student portal                                                                                                                                      |
-| 🚧 Planned     | 🔐 Authentication      | Role-based login system                                                                                                                                                   |
-| 🚧 Planned     | 📑 Reports & Exports   | PDF/Excel reports with filters                                                                                                                                            |
+| Status      | Module                 | Key Features                                                                                                                                                          |
+| ----------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ Frontend | 📦 **Store Module**    | Product Master (filters, sorting, CRUD), Issued History, **Purchase Order (auto-creation & detail entry)**. **Frontend completed, backend integration pending.**      |
+| ✅ Frontend | 👨‍🏫 **HR & Staff**      | Leave Management (Employee, Clerk, SuperClerk roles), Delegation, Half-day leaves, Auto balance deduction, Reports (Excel), Search & filters. **Frontend completed.** |
+| 🚧 Planned  | 🧾 Academic Management | Students, courses, exams                                                                                                                                              |
+| 🚧 Planned  | 💰 Finance & Fees      | Student fees, finance records                                                                                                                                         |
+| 🚧 Planned  | 📊 Attendance          | Attendance tracking & student portal                                                                                                                                  |
+| 🚧 Planned  | 🔐 Authentication      | Role-based login system                                                                                                                                               |
+| 🚧 Planned  | 📑 Reports & Exports   | PDF/Excel reports with filters                                                                                                                                        |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] ✅ Store Module – Product Master, Issued History, **PO Module (auto-creation & details)**
+- [x] ✅ Store Module – **Frontend completed (Product Master, Issued History, PO Module UI)**
+- [x] ✅ HR & Staff – **Frontend completed (Leave Management system)**
 - [ ] 🧾 Academic Management (students, courses, exams)
 - [ ] 💰 Finance & Fees Module
-- [ ] 👨‍🏫 HR & Staff Management
 - [ ] 📊 Attendance & Student Portal
 - [ ] 🔐 Authentication & Role-based login
 - [ ] 📑 Report exports (PDF/Excel with filters)
@@ -52,9 +57,10 @@ It aims to provide an all-in-one solution for managing **inventory, academics, a
 ## 🛠️ Tech Stack
 
 - ⚛️ **Frontend:** React + Vite, TailwindCSS
-- 🖥️ **Backend:** Laravel (API)
+- 🖥️ **Backend:** Laravel (REST API)
 - 🗄️ **Database:** MySQL
-- 🎨 **UI Libraries:** React Icons, Headless UI
+- 🎨 **UI Libraries:** React Icons, Headless UI, Recharts
+- 📦 **Other Tools:** Papaparse (CSV import), FullCalendar, jsPDF, XLSX
 
 ---
 

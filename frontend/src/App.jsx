@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductMaster from "./pages/ProductMaster/ProductMaster";
 import IssuedHistory from "./pages/IssuedHistory/IssuedHistory";
 import PurchaseOrders from "./pages/Store/PurchaseOrders";
+import LeaveManagement from "./pages/LeaveManagement/LeaveManagement";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
             element={<IssuedHistory userRole="labAssistant" />}
           />
           <Route path="/store/purchase-orders" element={<PurchaseOrders />} />
+          <Route
+            path="/leave-management"
+            element={<LeaveManagement userRole="superClerk" />}
+          />
         </Route>
       </Routes>
     </Router>

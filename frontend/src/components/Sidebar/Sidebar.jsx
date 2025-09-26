@@ -4,6 +4,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { menuConfig } from "../../config/menuConfig";
 import logo from "/logo.png";
+
 export default function Sidebar({
   sidebarOpen,
   setSidebarOpen,
@@ -11,6 +12,12 @@ export default function Sidebar({
   setCollapsed,
 }) {
   const location = useLocation();
+
+  // TODO: later get this from login/auth system
+  const userRole = "superClerk"; // "superClerk" | "clerk" | "employee" | "store"
+
+  // get menu based on role
+  const config = menuConfig(userRole);
 
   const isActive = (path) => location.pathname === path;
 
@@ -24,7 +31,7 @@ export default function Sidebar({
     >
       {/* Sidebar Header */}
       <div className="flex items-center justify-between p-3 border-b border-gray-200">
-        {!collapsed && <img className="h-16" src={logo} alt="" srcset="" />}
+        {!collapsed && <img className="h-16" src={logo} alt="Spectech ERP" />}
 
         {/* Mobile close */}
         <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
@@ -46,7 +53,7 @@ export default function Sidebar({
 
       {/* Sidebar Navigation */}
       <nav className="flex-grow px-2 py-4 overflow-y-auto space-y-4">
-        {menuConfig.map((section, idx) => (
+        {config.map((section, idx) => (
           <div key={idx}>
             {!collapsed && (
               <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">
@@ -67,11 +74,10 @@ export default function Sidebar({
                     }`}
                   title={collapsed ? link.label : ""}
                 >
-                  {/* Active link indicator bar */}
+                  {/* Active link indicator */}
                   {isActive(link.path) && (
                     <span className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary-color)] rounded-r-md"></span>
                   )}
-
                   <span className="text-lg">{link.icon}</span>
                   {!collapsed && link.label}
                 </Link>
