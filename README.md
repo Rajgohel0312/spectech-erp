@@ -39,10 +39,6 @@ _A modern ERP solution for digitalizing college operations._
 | ✅ Frontend | 💰 **Finance & Fees**     | Super Accountant Dashboard (college → dept → semester → student hierarchy), Dept-wise Accountant Dashboard, Fee Structure (per college/dept/sem), Payments (cash/online), Pending Fees, Reports (filters + search + pagination + CSV export), Student Fee & Receipt view. **Frontend completed.** |
 | 🚧 Planned  | 🔐 Authentication       | Role-based login system                                                                                                                                               |
 | 🚧 Planned  | 📑 Reports & Exports    | Advanced PDF/Excel reports with charts and filters                                                                                                                    |
-| 🚧 Planned  | 📚 Library Management   | Book catalog, issue/return tracking, fines, overdue alerts                                                                                                            |
-| 🚧 Planned  | 🏫 Hostel Management    | Room allocation, hostel fee integration, complaints & maintenance                                                                                                     |
-| 🚧 Planned  | 🗓️ Timetable & Scheduling | Class scheduling, faculty allocation, room assignment, clash detection                                                                                                |
-| 🚧 Planned  | 📑 Examination & Results | Marks entry, grade sheet generation, GPA/CGPA calculation, result publishing                                                                                          |
 
 ---
 
@@ -55,10 +51,6 @@ _A modern ERP solution for digitalizing college operations._
 - [x] ✅ Finance & Fees – **Dashboards, Structure, Payments, Pending, Reports, Student receipts (Frontend complete)**
 - [ ] 🔐 Authentication & Role-based login
 - [ ] 📑 Advanced Reports (PDF/Excel with charts & filters)
-- [ ] 📚 Library Module
-- [ ] 🏫 Hostel Management
-- [ ] 🗓️ Timetable & Scheduling
-- [ ] 📑 Examination & Results Module
 
 ---
 
