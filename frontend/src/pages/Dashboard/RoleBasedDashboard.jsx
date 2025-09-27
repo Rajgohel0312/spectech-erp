@@ -6,6 +6,8 @@ import SuperClerkDashboard from "./roles/SuperClerkDashboard";
 import EmployeeDashboard from "./roles/EmployeeDashboard";
 import LabAssistantDashboard from "./roles/LabAssistantDashboard";
 import StoreDashboard from "./roles/StoreDashboard";
+import SuperAccountantDashboard from "./SuperAccountantDashboard";
+import AccountantDashboard from "./AccountantDashboard";
 
 export default function RoleBasedDashboard({ userRole }) {
   switch (userRole) {
@@ -25,6 +27,10 @@ export default function RoleBasedDashboard({ userRole }) {
       return <LabAssistantDashboard />;
     case "store":
       return <StoreDashboard />;
+    case "superAccountant":
+      return <SuperAccountantDashboard />;
+    case "accountant":
+      return <AccountantDashboard deptName="Computer Science" />;
     default:
       return <div className="p-6">🚫 No dashboard available for this role</div>;
   }

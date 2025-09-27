@@ -5,6 +5,8 @@ import {
   FaUsers,
   FaFileAlt,
   FaCalendarAlt,
+  FaExclamationTriangle,
+  FaFileInvoiceDollar,
 } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import { FaFlask, FaHistory, FaFileInvoice } from "react-icons/fa";
@@ -27,6 +29,8 @@ export const menuConfig = [
           "employee",
           "superClerk",
           "store",
+          "accountant",
+          "superAccountant",
         ],
       },
     ],
@@ -135,6 +139,47 @@ export const menuConfig = [
         label: "Profile",
         icon: <FaUsers />,
         roles: ["employee"],
+      },
+    ],
+  },
+  {
+    section: "Finance & Fees",
+    links: [
+      {
+        path: "/finance/fee-structure",
+        label: "Fee Structure",
+        icon: <FaFileInvoiceDollar />,
+        roles: ["superAccountant"],
+      },
+      {
+        path: "/finance/payments",
+        label: "Payments",
+        icon: <FaFileAlt />,
+        roles: ["accountant", "superAccountant", "clerk"],
+      },
+      {
+        path: "/finance/pending",
+        label: "Pending Fees",
+        icon: <FaExclamationTriangle />,
+        roles: ["accountant", "superAccountant"],
+      },
+      {
+        path: "/finance/reports",
+        label: "Reports",
+        icon: <FaClipboardList />,
+        roles: ["superAccountant"],
+      },
+      {
+        path: "/finance/my-fees",
+        label: "My Fees",
+        icon: <FaFileInvoice />,
+        roles: ["student"],
+      },
+      {
+        path: "/finance/my-receipts",
+        label: "My Receipts",
+        icon: <FaFileAlt />,
+        roles: ["student"],
       },
     ],
   },
