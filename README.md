@@ -36,9 +36,13 @@ _A modern ERP solution for digitalizing college operations._
 | ✅ Frontend | 👨‍🏫 **HR & Staff**       | Leave Management (Employee, Clerk, SuperClerk roles), Delegation, Half-day leaves, Auto balance deduction, Reports (Excel), Search & filters. **Frontend completed.** |
 | ✅ Frontend | 🧾 **Academic Management** | Students, Courses, Exams with filters (college, department, semester), pagination & search. Role-based access (Admin, Faculty, Student).                              |
 | ✅ Frontend | 📊 **Attendance System**  | Faculty can mark attendance (date/time, course-wise). Records stored & optimized. Students can view their attendance %, warnings (<75%). Admin sees summaries + charts. |
-| 🚧 Planned  | 💰 Finance & Fees       | Student fees, finance records                                                                                                                                         |
+| ✅ Frontend | 💰 **Finance & Fees**     | Super Accountant Dashboard (college → dept → semester → student hierarchy), Dept-wise Accountant Dashboard, Fee Structure (per college/dept/sem), Payments (cash/online), Pending Fees, Reports (filters + search + pagination + CSV export), Student Fee & Receipt view. **Frontend completed.** |
 | 🚧 Planned  | 🔐 Authentication       | Role-based login system                                                                                                                                               |
-| 🚧 Planned  | 📑 Reports & Exports    | PDF/Excel reports with filters                                                                                                                                        |
+| 🚧 Planned  | 📑 Reports & Exports    | Advanced PDF/Excel reports with charts and filters                                                                                                                    |
+| 🚧 Planned  | 📚 Library Management   | Book catalog, issue/return tracking, fines, overdue alerts                                                                                                            |
+| 🚧 Planned  | 🏫 Hostel Management    | Room allocation, hostel fee integration, complaints & maintenance                                                                                                     |
+| 🚧 Planned  | 🗓️ Timetable & Scheduling | Class scheduling, faculty allocation, room assignment, clash detection                                                                                                |
+| 🚧 Planned  | 📑 Examination & Results | Marks entry, grade sheet generation, GPA/CGPA calculation, result publishing                                                                                          |
 
 ---
 
@@ -48,9 +52,13 @@ _A modern ERP solution for digitalizing college operations._
 - [x] ✅ HR & Staff – **Frontend completed (Leave Management system)**
 - [x] ✅ Academic Management – **Students, Courses, Exams (filters, pagination, role-based access)**
 - [x] ✅ Attendance – **Faculty marking, student self-view, admin summaries & warnings**
-- [ ] 💰 Finance & Fees Module
+- [x] ✅ Finance & Fees – **Dashboards, Structure, Payments, Pending, Reports, Student receipts (Frontend complete)**
 - [ ] 🔐 Authentication & Role-based login
-- [ ] 📑 Report exports (PDF/Excel with filters)
+- [ ] 📑 Advanced Reports (PDF/Excel with charts & filters)
+- [ ] 📚 Library Module
+- [ ] 🏫 Hostel Management
+- [ ] 🗓️ Timetable & Scheduling
+- [ ] 📑 Examination & Results Module
 
 ---
 
