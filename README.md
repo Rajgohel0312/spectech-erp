@@ -30,15 +30,15 @@ _A modern ERP solution for digitalizing college operations._
 
 ## ✨ Features
 
-| Status      | Module                 | Key Features                                                                                                                                                          |
-| ----------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ✅ Frontend | 📦 **Store Module**    | Product Master (filters, sorting, CRUD), Issued History, **Purchase Order (auto-creation & detail entry)**. **Frontend completed, backend integration pending.**      |
-| ✅ Frontend | 👨‍🏫 **HR & Staff**      | Leave Management (Employee, Clerk, SuperClerk roles), Delegation, Half-day leaves, Auto balance deduction, Reports (Excel), Search & filters. **Frontend completed.** |
-| 🚧 Planned  | 🧾 Academic Management | Students, courses, exams                                                                                                                                              |
-| 🚧 Planned  | 💰 Finance & Fees      | Student fees, finance records                                                                                                                                         |
-| 🚧 Planned  | 📊 Attendance          | Attendance tracking & student portal                                                                                                                                  |
-| 🚧 Planned  | 🔐 Authentication      | Role-based login system                                                                                                                                               |
-| 🚧 Planned  | 📑 Reports & Exports   | PDF/Excel reports with filters                                                                                                                                        |
+| Status      | Module                  | Key Features                                                                                                                                                          |
+| ----------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ Frontend | 📦 **Store Module**     | Product Master (filters, sorting, CRUD), Issued History, **Purchase Order (auto-creation & detail entry)**. **Frontend completed, backend integration pending.**      |
+| ✅ Frontend | 👨‍🏫 **HR & Staff**       | Leave Management (Employee, Clerk, SuperClerk roles), Delegation, Half-day leaves, Auto balance deduction, Reports (Excel), Search & filters. **Frontend completed.** |
+| ✅ Frontend | 🧾 **Academic Management** | Students, Courses, Exams with filters (college, department, semester), pagination & search. Role-based access (Admin, Faculty, Student).                              |
+| ✅ Frontend | 📊 **Attendance System**  | Faculty can mark attendance (date/time, course-wise). Records stored & optimized. Students can view their attendance %, warnings (<75%). Admin sees summaries + charts. |
+| 🚧 Planned  | 💰 Finance & Fees       | Student fees, finance records                                                                                                                                         |
+| 🚧 Planned  | 🔐 Authentication       | Role-based login system                                                                                                                                               |
+| 🚧 Planned  | 📑 Reports & Exports    | PDF/Excel reports with filters                                                                                                                                        |
 
 ---
 
@@ -46,9 +46,9 @@ _A modern ERP solution for digitalizing college operations._
 
 - [x] ✅ Store Module – **Frontend completed (Product Master, Issued History, PO Module UI)**
 - [x] ✅ HR & Staff – **Frontend completed (Leave Management system)**
-- [ ] 🧾 Academic Management (students, courses, exams)
+- [x] ✅ Academic Management – **Students, Courses, Exams (filters, pagination, role-based access)**
+- [x] ✅ Attendance – **Faculty marking, student self-view, admin summaries & warnings**
 - [ ] 💰 Finance & Fees Module
-- [ ] 📊 Attendance & Student Portal
 - [ ] 🔐 Authentication & Role-based login
 - [ ] 📑 Report exports (PDF/Excel with filters)
 
@@ -61,6 +61,7 @@ _A modern ERP solution for digitalizing college operations._
 - 🗄️ **Database:** MySQL
 - 🎨 **UI Libraries:** React Icons, Headless UI, Recharts
 - 📦 **Other Tools:** Papaparse (CSV import), FullCalendar, jsPDF, XLSX
+- 💾 **Storage:** LocalStorage (for mock data in development)
 
 ---
 
