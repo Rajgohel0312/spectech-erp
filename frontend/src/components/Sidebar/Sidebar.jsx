@@ -10,15 +10,9 @@ export default function Sidebar({
   setSidebarOpen,
   collapsed,
   setCollapsed,
+  userRole,
 }) {
   const location = useLocation();
-
-  // TODO: later get this from login/auth system
-  const userRole = "superClerk"; // "superClerk" | "clerk" | "employee" | "store"
-
-  // get menu based on role
-  const config = menuConfig(userRole);
-
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -33,12 +27,12 @@ export default function Sidebar({
       <div className="flex items-center justify-between p-3 border-b border-gray-200">
         {!collapsed && <img className="h-16" src={logo} alt="Spectech ERP" />}
 
-        {/* Mobile close */}
+        {/* Mobile close button */}
         <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
           <IoCloseSharp className="w-6 h-6" />
         </button>
 
-        {/* Desktop collapse */}
+        {/* Collapse/Expand button */}
         <button
           className="hidden md:block text-gray-600 hover:text-[var(--primary-color)]"
           onClick={() => setCollapsed(!collapsed)}
@@ -53,38 +47,48 @@ export default function Sidebar({
 
       {/* Sidebar Navigation */}
       <nav className="flex-grow px-2 py-4 overflow-y-auto space-y-4">
-        {config.map((section, idx) => (
-          <div key={idx}>
-            {!collapsed && (
-              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">
-                {section.section}
-              </h3>
-            )}
-            <div className="space-y-1">
-              {section.links.map((link, i) => (
-                <Link
-                  key={i}
-                  to={link.path}
-                  onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg relative transition-all duration-200
-                    ${
-                      isActive(link.path)
-                        ? "bg-[var(--primary-color)] text-white"
-                        : "hover:bg-[var(--primary-color)] hover:text-white"
-                    }`}
-                  title={collapsed ? link.label : ""}
-                >
-                  {/* Active link indicator */}
-                  {isActive(link.path) && (
-                    <span className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary-color)] rounded-r-md"></span>
-                  )}
-                  <span className="text-lg">{link.icon}</span>
-                  {!collapsed && link.label}
-                </Link>
-              ))}
+        {menuConfig.map((section, idx) => {
+          // Filter links based on userRole
+          const visibleLinks = section.links.filter(
+            (link) => !link.roles || link.roles.includes(userRole)
+          );
+
+          // Skip section if no visible links
+          if (visibleLinks.length === 0) return null;
+
+          return (
+            <div key={idx}>
+              {!collapsed && (
+                <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">
+                  {section.section}
+                </h3>
+              )}
+              <div className="space-y-1">
+                {visibleLinks.map((link, i) => (
+                  <Link
+                    key={i}
+                    to={link.path}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg relative transition-all duration-200
+                      ${
+                        isActive(link.path)
+                          ? "bg-[var(--primary-color)] text-white"
+                          : "hover:bg-[var(--primary-color)] hover:text-white"
+                      }`}
+                    title={collapsed ? link.label : ""}
+                  >
+                    {/* Active indicator */}
+                    {isActive(link.path) && (
+                      <span className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary-color)] rounded-r-md"></span>
+                    )}
+                    <span className="text-lg">{link.icon}</span>
+                    {!collapsed && link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </nav>
 
       {/* Sidebar Footer */}

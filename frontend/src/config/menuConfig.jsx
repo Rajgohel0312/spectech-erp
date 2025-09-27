@@ -1,129 +1,153 @@
 import {
-  FaTachometerAlt,
-  FaFlask,
-  FaHistory,
-  FaFileInvoice,
+  FaUserGraduate,
+  FaBook,
+  FaClipboardList,
   FaUsers,
   FaFileAlt,
   FaCalendarAlt,
 } from "react-icons/fa";
+import { MdSchool } from "react-icons/md";
+import { FaFlask, FaHistory, FaFileInvoice } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 
-// ✅ role-based config
-export const menuConfig = (userRole) => {
-  // Super Clerk
-  if (userRole === "superClerk") {
-    return [
+export const menuConfig = [
+  {
+    section: "Main",
+    links: [
       {
-        section: "Main",
-        links: [{ path: "/", label: "Dashboard", icon: <FaTachometerAlt /> }],
-      },
-      {
-        section: "HR & Payroll",
-        links: [
-          {
-            path: "/leave-management",
-            label: "Leave Management (All Colleges)",
-            icon: <FaUsers />,
-          },
-          { path: "/reports", label: "Reports", icon: <FaFileAlt /> },
-          {
-            path: "/hr-settings",
-            label: "HR Settings",
-            icon: <IoSettingsOutline />,
-          },
+        path: "/",
+        label: "Dashboard",
+        icon: <MdSchool />,
+        roles: [
+          "admin",
+          "faculty",
+          "student",
+          "labAssistant",
+          "clerk",
+          "employee",
+          "superClerk",
+          "store",
         ],
       },
-    ];
-  }
+    ],
+  },
 
-  // Clerk
-  if (userRole === "clerk") {
-    return [
+  {
+    section: "Academic Management",
+    links: [
       {
-        section: "Main",
-        links: [{ path: "/", label: "Dashboard", icon: <FaTachometerAlt /> }],
+        path: "/academic/students",
+        label: "Students",
+        icon: <FaUserGraduate />,
+        roles: ["admin", "faculty"],
       },
       {
-        section: "HR & Payroll",
-        links: [
-          {
-            path: "/leave-management",
-            label: "Leave Management (My College)",
-            icon: <FaUsers />,
-          },
-          { path: "/leave-upload", label: "Upload CSV", icon: <FaFileAlt /> },
-        ],
+        path: "/academic/courses",
+        label: "Courses",
+        icon: <FaBook />,
+        roles: ["admin", "faculty", "student"],
       },
-    ];
-  }
+      {
+        path: "/academic/exams",
+        label: "Exams",
+        icon: <FaClipboardList />,
+        roles: ["admin", "faculty", "student"],
+      },
+      {
+        path: "/academic/attendance",
+        label: "Attendance",
+        icon: <FaClipboardList />,
+        roles: ["faculty"], // only faculty can see it
+      },
+      {
+        path: "/academic/my-attendance",
+        label: "My Attendance",
+        icon: <FaCalendarAlt />, // ✅ use calendar icon
+        roles: ["student"], // ✅ only students see it
+      },
+    ],
+  },
+  {
+    section: "Store Management",
+    links: [
+      {
+        path: "/product-master",
+        label: "Product Master",
+        icon: <FaFlask />,
+        roles: ["admin", "labAssistant", "store"],
+      },
+      {
+        path: "/issue-history",
+        label: "Issue History",
+        icon: <FaHistory />,
+        roles: ["admin", "labAssistant", "store"],
+      },
+      {
+        path: "/store/purchase-orders",
+        label: "Purchase Order",
+        icon: <FaFileInvoice />,
+        roles: ["admin", "labAssistant", "store"],
+      },
+    ],
+  },
 
-  // Employee
-  if (userRole === "employee") {
-    return [
+  {
+    section: "HR & Payroll",
+    links: [
       {
-        section: "Main",
-        links: [{ path: "/", label: "Dashboard", icon: <FaTachometerAlt /> }],
+        path: "/leave-management",
+        label: "Leave Management (All Colleges)",
+        icon: <FaUsers />,
+        roles: ["superClerk"],
       },
       {
-        section: "My Account",
-        links: [
-          {
-            path: "/leave-management",
-            label: "My Leaves",
-            icon: <FaCalendarAlt />,
-          },
-          { path: "/profile", label: "Profile", icon: <FaUsers /> },
-        ],
+        path: "/reports",
+        label: "Reports",
+        icon: <FaFileAlt />,
+        roles: ["superClerk"],
       },
-    ];
-  }
+      {
+        path: "/hr-settings",
+        label: "HR Settings",
+        icon: <IoSettingsOutline />,
+        roles: ["superClerk"],
+      },
+      {
+        path: "/leave-management",
+        label: "Leave Management (My College)",
+        icon: <FaUsers />,
+        roles: ["clerk"],
+      },
+      {
+        path: "/leave-upload",
+        label: "Upload CSV",
+        icon: <FaFileAlt />,
+        roles: ["clerk"],
+      },
+      {
+        path: "/leave-management",
+        label: "My Leaves",
+        icon: <FaCalendarAlt />,
+        roles: ["employee"],
+      },
+      {
+        path: "/profile",
+        label: "Profile",
+        icon: <FaUsers />,
+        roles: ["employee"],
+      },
+    ],
+  },
 
-  // Store Manager / Lab Assistant
-  if (userRole === "store") {
-    return [
+  {
+    section: "Settings",
+    links: [
       {
-        section: "Main",
-        links: [{ path: "/", label: "Dashboard", icon: <FaTachometerAlt /> }],
+        path: "/settings/general",
+        label: "General",
+        icon: <IoSettingsOutline />,
+        roles: ["admin", "store"],
       },
-      {
-        section: "Management",
-        links: [
-          {
-            path: "/product-master",
-            label: "Product Master",
-            icon: <FaFlask />,
-          },
-          {
-            path: "/issue-history",
-            label: "Issue History",
-            icon: <FaHistory />,
-          },
-          {
-            path: "/store/purchase-orders",
-            label: "Purchase Order",
-            icon: <FaFileInvoice />,
-          },
-        ],
-      },
-      {
-        section: "Settings",
-        links: [
-          {
-            path: "/settings/general",
-            label: "General",
-            icon: <IoSettingsOutline />,
-          },
-        ],
-      },
-    ];
-  }
-
-  // Default (fallback)
-  return [
-    {
-      section: "Main",
-      links: [{ path: "/", label: "Dashboard", icon: <FaTachometerAlt /> }],
-    },
-  ];
-};
+    ],
+  },
+];

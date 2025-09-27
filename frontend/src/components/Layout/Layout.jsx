@@ -3,10 +3,11 @@ import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 
-export default function Layout() {
+export default function Layout({ userRole }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+
   const hideSidebar =
     location.pathname === "/login" || location.pathname === "/signup";
 
@@ -18,6 +19,7 @@ export default function Layout() {
           setSidebarOpen={setSidebarOpen}
           collapsed={collapsed}
           setCollapsed={setCollapsed}
+          userRole={userRole} // ✅ pass role to sidebar
         />
       )}
 
@@ -25,8 +27,9 @@ export default function Layout() {
         {!hideSidebar && (
           <Topbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         )}
-        <main className="flex-1 bg-[var(--background-color)]">
-          <Outlet />
+        <main className="flex-1 bg-[var(--background-color)] min-h-screen">
+          {/* ✅ forward role into all pages via Outlet */}
+          <Outlet context={{ userRole }} />
         </main>
       </div>
     </div>
