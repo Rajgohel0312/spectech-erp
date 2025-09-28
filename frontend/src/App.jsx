@@ -27,9 +27,12 @@ import MyReceipts from "./pages/Finance/MyReceipts";
 // Seed
 import { seedFees } from "./utils/seedFees";
 
+import Login from "./pages/Auth/Login";
+// import ActivateAccount from "./pages/Auth/ActivateAccount";
+
 function App() {
   // ✅ Hardcode role for now (later from login system)
-  const userRole = "superAccountant";
+  const userRole = "superClerk";
   /**
    * Roles:
    * - admin
@@ -51,39 +54,83 @@ function App() {
   }
 
   // ✅ Ensure Fees seed
-  if (!localStorage.getItem("feeRecords") || !localStorage.getItem("feeStructure")) {
+  if (
+    !localStorage.getItem("feeRecords") ||
+    !localStorage.getItem("feeStructure")
+  ) {
     seedFees();
   }
 
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/activate" element={<ActivateAccount />} /> */}
+
         <Route element={<Layout userRole={userRole} />}>
           {/* ====== Dashboard ====== */}
-          <Route path="/" element={<RoleBasedDashboard userRole={userRole} />} />
+          <Route
+            path="/"
+            element={<RoleBasedDashboard userRole={userRole} />}
+          />
 
           {/* ====== Academic Management ====== */}
-          <Route path="/academic/students" element={<Students userRole={userRole} />} />
-          <Route path="/academic/courses" element={<Courses userRole={userRole} />} />
-          <Route path="/academic/exams" element={<Exams userRole={userRole} />} />
-          <Route path="/academic/attendance" element={<Attendance userRole={userRole} facultyName="Dr. Patel" />} />
-          <Route path="/academic/my-attendance" element={<MyAttendance userRole={userRole} studentRollNo={studentRollNo} />} />
+          <Route
+            path="/academic/students"
+            element={<Students userRole={userRole} />}
+          />
+          <Route
+            path="/academic/courses"
+            element={<Courses userRole={userRole} />}
+          />
+          <Route
+            path="/academic/exams"
+            element={<Exams userRole={userRole} />}
+          />
+          <Route
+            path="/academic/attendance"
+            element={<Attendance userRole={userRole} facultyName="Dr. Patel" />}
+          />
+          <Route
+            path="/academic/my-attendance"
+            element={
+              <MyAttendance userRole={userRole} studentRollNo={studentRollNo} />
+            }
+          />
 
           {/* ====== Store Management ====== */}
-          <Route path="/product-master" element={<ProductMaster userRole={userRole} />} />
-          <Route path="/issue-history" element={<IssuedHistory userRole={userRole} />} />
-          <Route path="/store/purchase-orders" element={<PurchaseOrders userRole={userRole} />} />
+          <Route
+            path="/product-master"
+            element={<ProductMaster userRole={userRole} />}
+          />
+          <Route
+            path="/issue-history"
+            element={<IssuedHistory userRole={userRole} />}
+          />
+          <Route
+            path="/store/purchase-orders"
+            element={<PurchaseOrders userRole={userRole} />}
+          />
 
           {/* ====== HR & Payroll ====== */}
-          <Route path="/leave-management" element={<LeaveManagement userRole={userRole} />} />
+          <Route
+            path="/leave-management"
+            element={<LeaveManagement userRole={userRole} />}
+          />
 
           {/* ====== Finance & Fees ====== */}
           <Route path="/finance/fee-structure" element={<FeeStructure />} />
           <Route path="/finance/payments" element={<Payments />} />
           <Route path="/finance/pending" element={<PendingFees />} />
           <Route path="/finance/reports" element={<FinanceReports />} />
-          <Route path="/finance/my-fees" element={<MyFees studentRollNo={studentRollNo} />} />
-          <Route path="/finance/my-receipts" element={<MyReceipts studentRollNo={studentRollNo} />} />
+          <Route
+            path="/finance/my-fees"
+            element={<MyFees studentRollNo={studentRollNo} />}
+          />
+          <Route
+            path="/finance/my-receipts"
+            element={<MyReceipts studentRollNo={studentRollNo} />}
+          />
         </Route>
       </Routes>
     </Router>

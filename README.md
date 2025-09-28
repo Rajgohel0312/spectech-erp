@@ -30,15 +30,14 @@ _A modern ERP solution for digitalizing college operations._
 
 ## ✨ Features
 
-| Status      | Module                  | Key Features                                                                                                                                                          |
-| ----------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ✅ Frontend | 📦 **Store Module**     | Product Master (filters, sorting, CRUD), Issued History, **Purchase Order (auto-creation & detail entry)**. **Frontend completed, backend integration pending.**      |
-| ✅ Frontend | 👨‍🏫 **HR & Staff**       | Leave Management (Employee, Clerk, SuperClerk roles), Delegation, Half-day leaves, Auto balance deduction, Reports (Excel), Search & filters. **Frontend completed.** |
-| ✅ Frontend | 🧾 **Academic Management** | Students, Courses, Exams with filters (college, department, semester), pagination & search. Role-based access (Admin, Faculty, Student).                              |
-| ✅ Frontend | 📊 **Attendance System**  | Faculty can mark attendance (date/time, course-wise). Records stored & optimized. Students can view their attendance %, warnings (<75%). Admin sees summaries + charts. |
-| ✅ Frontend | 💰 **Finance & Fees**     | Super Accountant Dashboard (college → dept → semester → student hierarchy), Dept-wise Accountant Dashboard, Fee Structure (per college/dept/sem), Payments (cash/online), Pending Fees, Reports (filters + search + pagination + CSV export), Student Fee & Receipt view. **Frontend completed.** |
-| 🚧 Planned  | 🔐 Authentication       | Role-based login system                                                                                                                                               |
-| 🚧 Planned  | 📑 Reports & Exports    | Advanced PDF/Excel reports with charts and filters                                                                                                                    |
+| Status          | Module                     | Key Features                                                                                                                                                          |
+| --------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ Frontend     | 📦 **Store Module**         | Product Master (filters, sorting, CRUD), Issued History, **Purchase Order (auto-creation & detail entry)**. **Frontend completed, backend integration pending.**      |
+| ✅ Frontend     | 👨‍🏫 **HR & Staff**           | Leave Management (Employee, Clerk, SuperClerk roles), Delegation, Half-day leaves, Auto balance deduction, Reports (Excel), Search & filters. **Frontend completed.** |
+| ✅ Frontend     | 🧾 **Academic Management**   | Students (import by Clerks dept/sem wise), Courses, Exams with filters (college, department, semester), pagination & search. Role-based access (Admin, Faculty, Student). |
+| ✅ Frontend     | 📊 **Attendance System**    | Faculty can mark attendance (date/time, course-wise). Records stored & optimized. Students can view their attendance %, warnings (<75%). Admin sees summaries + charts. |
+| ✅ Frontend     | 💰 **Finance & Fees**       | Super Accountant Dashboard (college → dept → semester → student hierarchy), Dept-wise Accountant Dashboard, Fee Structure (per college/dept/sem), Payments (cash/online), Pending Fees, Reports (filters + search + pagination + CSV export), Student Fee & Receipt view. **Frontend completed.** |
+| 🚀 In Progress  | 🔐 **Authentication**       | Role-based login system with first-time password setup. <br> - **Students**: RollNo + DOB (activation on first login). <br> - **Clerks/Faculty/Accountants**: Temp password from Admin, must reset on first login. <br> - **Super Roles**: Created directly in DB. <br> **Frontend completed, backend integration pending.** |                                                                                      |
 
 ---
 
@@ -46,12 +45,10 @@ _A modern ERP solution for digitalizing college operations._
 
 - [x] ✅ Store Module – **Frontend completed (Product Master, Issued History, PO Module UI)**
 - [x] ✅ HR & Staff – **Frontend completed (Leave Management system)**
-- [x] ✅ Academic Management – **Students, Courses, Exams (filters, pagination, role-based access)**
+- [x] ✅ Academic Management – **Students (clerk imports), Courses, Exams (filters, pagination, role-based access)**
 - [x] ✅ Attendance – **Faculty marking, student self-view, admin summaries & warnings**
 - [x] ✅ Finance & Fees – **Dashboards, Structure, Payments, Pending, Reports, Student receipts (Frontend complete)**
-- [ ] 🔐 Authentication & Role-based login
-- [ ] 📑 Advanced Reports (PDF/Excel with charts & filters)
-
+- [ ] 🔐 Authentication & Role-based login – **Frontend completed, backend integration pending**
 ---
 
 ## 🛠️ Tech Stack
