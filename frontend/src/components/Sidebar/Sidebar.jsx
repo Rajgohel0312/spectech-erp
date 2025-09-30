@@ -1,9 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi2";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { menuConfig } from "../../config/menuConfig";
 import logo from "/logo.png";
+import api from "../../utils/api"; // ✅ axios instance
 
 export default function Sidebar({
   sidebarOpen,
@@ -13,7 +14,25 @@ export default function Sidebar({
   userRole,
 }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const isActive = (path) => location.pathname === path;
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/logout"); // backend logout
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+
+    // Clear stored user session
+    localStorage.removeItem("token");
+    localStorage.removeItem("roles");
+    localStorage.removeItem("user");
+
+    // Redirect to login
+    navigate("/login", { replace: true });
+  };
 
   return (
     <div
@@ -48,12 +67,10 @@ export default function Sidebar({
       {/* Sidebar Navigation */}
       <nav className="flex-grow px-2 py-4 overflow-y-auto space-y-4">
         {menuConfig.map((section, idx) => {
-          // Filter links based on userRole
           const visibleLinks = section.links.filter(
             (link) => !link.roles || link.roles.includes(userRole)
           );
 
-          // Skip section if no visible links
           if (visibleLinks.length === 0) return null;
 
           return (
@@ -77,7 +94,6 @@ export default function Sidebar({
                       }`}
                     title={collapsed ? link.label : ""}
                   >
-                    {/* Active indicator */}
                     {isActive(link.path) && (
                       <span className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary-color)] rounded-r-md"></span>
                     )}
@@ -94,7 +110,7 @@ export default function Sidebar({
       {/* Sidebar Footer */}
       <div className="px-3 py-3 border-t border-gray-200">
         <button
-          onClick={() => alert("Logging out...")}
+          onClick={handleLogout}
           className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-100 rounded-lg transition"
           title={collapsed ? "Logout" : ""}
         >

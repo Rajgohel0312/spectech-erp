@@ -7,6 +7,7 @@ import {
   FaCalendarAlt,
   FaExclamationTriangle,
   FaFileInvoiceDollar,
+  FaUniversity,
 } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import { FaFlask, FaHistory, FaFileInvoice } from "react-icons/fa";
@@ -32,6 +33,54 @@ export const menuConfig = [
           "accountant",
           "superAccountant",
         ],
+      },
+    ],
+  },
+
+  {
+    section: "User Management",
+    links: [
+      // ==== Admin Features ====
+      {
+        path: "/user-management/add-super",
+        label: "Add Super Users",
+        icon: <FaUsers />,
+        roles: ["admin"], // only admin can add superClerk / superAccountant
+      },
+      {
+        path: "/user-management/manage",
+        label: "Manage Users",
+        icon: <FaFileAlt />,
+        roles: ["admin"], // only admin can activate/deactivate
+      },
+
+      // ==== SuperClerk Features ====
+      {
+        path: "/user-management/add-clerk",
+        label: "Add Clerk",
+        icon: <FaUsers />,
+        roles: ["superClerk"],
+      },
+      {
+        path: "/user-management/add-employee", // ✅ new
+        label: "Add Employee",
+        icon: <FaUsers />,
+        roles: ["superClerk"],
+      },
+      // ==== SuperAccountant Features ====
+      {
+        path: "/user-management/add-accountant",
+        label: "Add Accountant",
+        icon: <FaUsers />,
+        roles: ["superAccountant"],
+      },
+
+      // ==== Clerk Features ====
+      {
+        path: "/user-management/import-students",
+        label: "Import Students",
+        icon: <FaFileAlt />,
+        roles: ["clerk"],
       },
     ],
   },
@@ -180,6 +229,23 @@ export const menuConfig = [
         label: "My Receipts",
         icon: <FaFileAlt />,
         roles: ["student"],
+      },
+    ],
+  },
+  {
+    section: "Institution Management",
+    links: [
+      {
+        path: "/colleges",
+        label: "Colleges",
+        icon: <FaUniversity />,
+        roles: ["admin"],
+      },
+      {
+        path: "/departments",
+        label: "Departments",
+        icon: <FaBook />,
+        roles: ["admin"],
       },
     ],
   },

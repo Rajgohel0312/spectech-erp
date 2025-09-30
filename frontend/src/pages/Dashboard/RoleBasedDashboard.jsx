@@ -10,7 +10,10 @@ import SuperAccountantDashboard from "./SuperAccountantDashboard";
 import AccountantDashboard from "./AccountantDashboard";
 
 export default function RoleBasedDashboard({ userRole }) {
-  switch (userRole) {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const role = typeof userRole === "object" ? userRole.name : userRole;
+
+  switch (role) {
     case "admin":
       return <AdminDashboard />;
     case "faculty":
@@ -18,7 +21,7 @@ export default function RoleBasedDashboard({ userRole }) {
     case "student":
       return <StudentDashboard />;
     case "clerk":
-      return <ClerkDashboard />;
+      return <ClerkDashboard collegeName={user?.college?.name || null} />;
     case "superClerk":
       return <SuperClerkDashboard />;
     case "employee":
@@ -30,7 +33,7 @@ export default function RoleBasedDashboard({ userRole }) {
     case "superAccountant":
       return <SuperAccountantDashboard />;
     case "accountant":
-      return <AccountantDashboard deptName="Computer Science" />;
+      return <AccountantDashboard collegeName={user?.college?.name} />;
     default:
       return <div className="p-6">🚫 No dashboard available for this role</div>;
   }
