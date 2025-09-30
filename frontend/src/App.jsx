@@ -38,6 +38,8 @@ import { seedAttendance } from "./utils/seedAttendance";
 import { seedFees } from "./utils/seedFees";
 import ProtectedRoute from "./pages/Auth/ProtectedRoute";
 import { useAuth } from "./pages/Auth/AuthContext";
+import AddStore from "./pages/UserManagement/Admin/AddStore";
+import AddLabAssistant from "./pages/UserManagement/Admin/AddLabAssistant";
 
 function App() {
   const { roles } = useAuth();
@@ -156,6 +158,11 @@ function App() {
             <Route
               path="/user-management/add-employee"
               element={<AddEmployee />}
+            />
+            <Route path="/user-management/add-store" element={<AddStore />} />
+            <Route
+              path="/user-management/add-lab-assistant"
+              element={<AddLabAssistant />}
             />
           </Route>
         </Route>

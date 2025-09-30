@@ -7,7 +7,10 @@ export default function ManageUsers() {
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("");
-  const [pagination, setPagination] = useState({ current_page: 1, last_page: 1 });
+  const [pagination, setPagination] = useState({
+    current_page: 1,
+    last_page: 1,
+  });
 
   const fetchUsers = async (page = 1) => {
     try {
@@ -51,7 +54,11 @@ export default function ManageUsers() {
           className="border p-2 rounded w-60"
         />
 
-        <select value={role} onChange={(e) => setRole(e.target.value)} className="border p-2 rounded">
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="border p-2 rounded"
+        >
           <option value="">All Roles</option>
           <option value="admin">Admin</option>
           <option value="superClerk">Super Clerk</option>
@@ -59,10 +66,13 @@ export default function ManageUsers() {
           <option value="superAccountant">Super Accountant</option>
           <option value="accountant">Accountant</option>
           <option value="faculty">Faculty</option>
-          <option value="student">Student</option>
         </select>
 
-        <select value={status} onChange={(e) => setStatus(e.target.value)} className="border p-2 rounded">
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="border p-2 rounded"
+        >
           <option value="">All Status</option>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
@@ -86,36 +96,42 @@ export default function ManageUsers() {
         </thead>
         <tbody>
           {users.length > 0 ? (
-            users.map((u) => (
-              <tr key={u.id}>
-                <td className="border p-2">{u.id}</td>
-                <td className="border p-2">{u.name}</td>
-                <td className="border p-2">{u.email || u.enrollment || u.employee_id}</td>
-                <td className="border p-2">
-                  {u.roles && u.roles.length > 0 ? u.roles.join(", ") : "-"}
-                </td>
-                <td className="border p-2">
-                  {u.college ? `${u.college.name} (${u.college.code})` : "-"}
-                </td>
-                <td className="border p-2">
-                  {u.is_active ? (
-                    <span className="text-green-600 font-bold">Active</span>
-                  ) : (
-                    <span className="text-red-600 font-bold">Inactive</span>
-                  )}
-                </td>
-                <td className="border p-2">
-                  <button
-                    onClick={() => toggleActivation(u.id)}
-                    className={`px-3 py-1 rounded text-white ${
-                      u.is_active ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"
-                    }`}
-                  >
-                    {u.is_active ? "Deactivate" : "Activate"}
-                  </button>
-                </td>
-              </tr>
-            ))
+            users
+              .filter((u) => !u.roles?.includes("student")) // ✅ exclude students
+              .map((u) => (
+                <tr key={u.id}>
+                  <td className="border p-2">{u.id}</td>
+                  <td className="border p-2">{u.name}</td>
+                  <td className="border p-2">
+                    {u.email || u.enrollment || u.employee_id}
+                  </td>
+                  <td className="border p-2">
+                    {u.roles && u.roles.length > 0 ? u.roles.join(", ") : "-"}
+                  </td>
+                  <td className="border p-2">
+                    {u.college ? `${u.college.name} (${u.college.code})` : "-"}
+                  </td>
+                  <td className="border p-2">
+                    {u.is_active ? (
+                      <span className="text-green-600 font-bold">Active</span>
+                    ) : (
+                      <span className="text-red-600 font-bold">Inactive</span>
+                    )}
+                  </td>
+                  <td className="border p-2">
+                    <button
+                      onClick={() => toggleActivation(u.id)}
+                      className={`px-3 py-1 rounded text-white ${
+                        u.is_active
+                          ? "bg-red-600 hover:bg-red-700"
+                          : "bg-green-600 hover:bg-green-700"
+                      }`}
+                    >
+                      {u.is_active ? "Deactivate" : "Activate"}
+                    </button>
+                  </td>
+                </tr>
+              ))
           ) : (
             <tr>
               <td colSpan="7" className="text-center p-4">

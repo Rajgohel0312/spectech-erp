@@ -24,7 +24,7 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::post('change-password', [AuthController::class, 'changePassword'])->middleware('auth:sanctum');
 
 // 👤 Get current user
-Route::get('me', function (\Illuminate\Http\Request $request) {
+Route::get('me', function (Request $request) {
     return $request->user()->load(['roles', 'college']);
 })->middleware(['auth:sanctum', 'active']);
 
@@ -33,6 +33,9 @@ Route::middleware(['auth:sanctum', 'role:admin', 'active'])->group(function () {
     Route::post('admin/create-super', [AdminController::class, 'createSuper']);
     Route::post('admin/toggle-activation/{user}', [AdminController::class, 'toggleActivation']);
     Route::get('admin/users', [AdminController::class, 'listUsers']);
+
+    Route::post('admin/create-store', [AdminController::class, 'createStore']);
+    Route::post('admin/create-lab-assistant', [AdminController::class, 'createLabAssistant']);
 
 });
 

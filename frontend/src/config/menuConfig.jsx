@@ -8,6 +8,7 @@ import {
   FaExclamationTriangle,
   FaFileInvoiceDollar,
   FaUniversity,
+  FaWarehouse,
 } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import { FaFlask, FaHistory, FaFileInvoice } from "react-icons/fa";
@@ -81,6 +82,18 @@ export const menuConfig = [
         label: "Import Students",
         icon: <FaFileAlt />,
         roles: ["clerk"],
+      },
+      {
+        label: "Add Store User",
+        path: "/user-management/add-store",
+        icon: <FaWarehouse />,
+        roles: ["admin"],
+      },
+      {
+        label: "Add Lab Assistant",
+        path: "/user-management/add-lab-assistant",
+        icon: <FaFlask />,
+        roles: ["admin"],
       },
     ],
   },
