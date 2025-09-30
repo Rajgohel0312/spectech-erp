@@ -25,6 +25,7 @@ import ManageUsers from "./pages/UserManagement/Admin/ManageUsers";
 import AddClerk from "./pages/UserManagement/SuperClerk/AddClerk";
 import AddAccountant from "./pages/UserManagement/SuperAccountant/AddAccountant";
 import ImportStudents from "./pages/UserManagement/Clerk/ImportStudents";
+import AddEmployee from "./pages/UserManagement/SuperClerk/AddEmployee";
 // Institution
 import Colleges from "./pages/CollegeManagement/Colleges";
 import Departments from "./pages/CollegeManagement/Departments";
@@ -36,18 +37,14 @@ import Login from "./pages/Auth/Login";
 import { seedAttendance } from "./utils/seedAttendance";
 import { seedFees } from "./utils/seedFees";
 import ProtectedRoute from "./pages/Auth/ProtectedRoute";
+import { useAuth } from "./pages/Auth/AuthContext";
 
 function App() {
-  // read role from storage once
-  let userRole = null;
-  const roles = JSON.parse(localStorage.getItem("roles") || "[]");
+  const { roles } = useAuth();
 
+  let userRole = null;
   if (roles.length > 0) {
-    if (typeof roles[0] === "string") {
-      userRole = roles[0];
-    } else if (roles[0].name) {
-      userRole = roles[0].name; 
-    }
+    userRole = typeof roles[0] === "string" ? roles[0] : roles[0]?.name || null;
   }
 
   const studentRollNo = "CSE1-001";
@@ -156,6 +153,10 @@ function App() {
             {/* Institution */}
             <Route path="/colleges" element={<Colleges />} />
             <Route path="/departments" element={<Departments />} />
+            <Route
+              path="/user-management/add-employee"
+              element={<AddEmployee />}
+            />
           </Route>
         </Route>
       </Routes>

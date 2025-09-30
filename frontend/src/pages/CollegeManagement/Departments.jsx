@@ -5,29 +5,32 @@ export default function Departments() {
   const [departments, setDepartments] = useState([]);
   const [colleges, setColleges] = useState([]);
   const [form, setForm] = useState({ name: "", code: "", college_id: "" });
-  const [editingId, setEditingId] = useState(null); // track edit mode
+  const [editingId, setEditingId] = useState(null);
   const [msg, setMsg] = useState("");
 
+  // 🔹 Fetch both departments + colleges
   const fetchData = async () => {
     try {
-      const resDept = await api.get("/departments");
+      const [resDept, resCol] = await Promise.all([
+        api.get("/departments"),
+        api.get("/colleges"),
+      ]);
       setDepartments(resDept.data);
-      const resCol = await api.get("/colleges");
       setColleges(resCol.data);
     } catch (err) {
-      console.error("Failed to fetch data", err);
+      console.error("Failed to fetch data", err.response?.data || err.message);
+      setMsg("❌ Failed to load data");
     }
   };
 
+  // 🔹 Create / Update
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editingId) {
-        // Update existing department
         await api.put(`/departments/${editingId}`, form);
         setMsg("✅ Department updated!");
       } else {
-        // Create new department
         await api.post("/departments", form);
         setMsg("✅ Department created!");
       }
@@ -35,11 +38,12 @@ export default function Departments() {
       setEditingId(null);
       fetchData();
     } catch (err) {
-      console.error(err);
+      console.error(err.response?.data || err.message);
       setMsg("❌ Failed to save department");
     }
   };
 
+  // 🔹 Edit
   const handleEdit = (dept) => {
     setForm({
       name: dept.name,
@@ -49,14 +53,16 @@ export default function Departments() {
     setEditingId(dept.id);
   };
 
+  // 🔹 Delete
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this department?")) return;
+    if (!window.confirm("Are you sure you want to delete this department?"))
+      return;
     try {
       await api.delete(`/departments/${id}`);
       setMsg("✅ Department deleted!");
       fetchData();
     } catch (err) {
-      console.error(err);
+      console.error(err.response?.data || err.message);
       setMsg("❌ Failed to delete department");
     }
   };
@@ -94,16 +100,22 @@ export default function Departments() {
           required
         >
           <option value="">Select College</option>
-          {colleges.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
-          ))}
+          {colleges.length > 0 ? (
+            colleges.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>No colleges found</option>
+          )}
         </select>
         <button
           type="submit"
           className={`px-4 py-2 rounded text-white ${
-            editingId ? "bg-blue-600 hover:bg-blue-700" : "bg-green-600 hover:bg-green-700"
+            editingId
+              ? "bg-blue-600 hover:bg-blue-700"
+              : "bg-green-600 hover:bg-green-700"
           }`}
         >
           {editingId ? "Update" : "Add"}
@@ -140,7 +152,12 @@ export default function Departments() {
                 <td className="border p-2">{d.id}</td>
                 <td className="border p-2">{d.name}</td>
                 <td className="border p-2">{d.code}</td>
-                <td className="border p-2">{d.college?.name}</td>
+                <td className="border p-2">
+                  {/* Show college name if eager loaded, else fallback */}
+                  {d.college?.name ||
+                    colleges.find((c) => c.id === d.college_id)?.name ||
+                    "—"}
+                </td>
                 <td className="border p-2 flex gap-2">
                   <button
                     onClick={() => handleEdit(d)}

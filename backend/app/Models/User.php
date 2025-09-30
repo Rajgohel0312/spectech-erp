@@ -33,9 +33,14 @@ class User extends Authenticatable
         'is_active' => 'boolean',
         'must_change_password' => 'boolean',
     ];
-
     public function college()
     {
-        return $this->belongsTo(College::class, 'college_id');
+        return $this->belongsTo(College::class);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
 }

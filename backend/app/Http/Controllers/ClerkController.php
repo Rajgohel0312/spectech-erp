@@ -30,12 +30,16 @@ class ClerkController extends Controller
             if (User::where('enrollment', $enroll)->exists())
                 continue;
 
+            // ✅ Generate email if missing
+            $email = $data['email'] ?? $enroll . '@student.local';
+
             $user = User::create([
                 'name' => $data['name'],
                 'enrollment' => $enroll,
                 'dob' => $dob,
                 'college_id' => $data['college_id'] ?? auth()->user()->college_id,
                 'department_id' => $data['department_id'] ?? null,
+                'email' => $email,
                 'password' => Hash::make($defaultPassword),
                 'must_change_password' => true,
                 'is_active' => true,
@@ -46,4 +50,5 @@ class ClerkController extends Controller
         fclose($file);
         return response()->json(['message' => "Imported $count students"]);
     }
+
 }

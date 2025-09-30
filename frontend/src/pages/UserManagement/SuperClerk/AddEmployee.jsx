@@ -7,20 +7,25 @@ export default function AddEmployee() {
     employee_id: "",
     email: "",
     college_id: "",
+    department_id: "",
   });
   const [msg, setMsg] = useState("");
   const [colleges, setColleges] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    const fetchColleges = async () => {
+    const fetchData = async () => {
       try {
-        const res = await api.get("/colleges");
-        setColleges(res.data);
+        const resCol = await api.get("/colleges");
+        setColleges(resCol.data);
+
+        const resDept = await api.get("/departments");
+        setDepartments(resDept.data);
       } catch (err) {
-        console.error("Failed to fetch colleges", err);
+        console.error("Failed to fetch data", err);
       }
     };
-    fetchColleges();
+    fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -28,16 +33,29 @@ export default function AddEmployee() {
     try {
       const res = await api.post("/super-clerk/create-employee", form);
       setMsg(`✅ Employee created. Temp Password: ${res.data.temp_password}`);
-      setForm({ name: "", employee_id: "", email: "", college_id: "" });
+      setForm({
+        name: "",
+        employee_id: "",
+        email: "",
+        college_id: "",
+        department_id: "",
+      });
     } catch (err) {
       console.error(err);
       setMsg("❌ Failed to create employee");
     }
   };
 
+  // filter departments by selected college
+  const filteredDepartments = form.college_id
+    ? departments.filter((d) => d.college_id == form.college_id)
+    : [];
+
   return (
     <div className="p-6 bg-white shadow rounded">
-      <h2 className="text-xl font-bold mb-4">Add Employee (College-wise)</h2>
+      <h2 className="text-xl font-bold mb-4">
+        Add Employee (College & Department wise)
+      </h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -64,16 +82,35 @@ export default function AddEmployee() {
           required
         />
 
+        {/* College Dropdown */}
         <select
           value={form.college_id}
-          onChange={(e) => setForm({ ...form, college_id: e.target.value })}
-          className="border p-2 mb-4 w-full"
+          onChange={(e) =>
+            setForm({ ...form, college_id: e.target.value, department_id: "" })
+          }
+          className="border p-2 mb-2 w-full"
           required
         >
           <option value="">Select College</option>
           {colleges.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name} ({c.code})
+            </option>
+          ))}
+        </select>
+
+        {/* Department Dropdown */}
+        <select
+          value={form.department_id}
+          onChange={(e) => setForm({ ...form, department_id: e.target.value })}
+          className="border p-2 mb-4 w-full"
+          required
+          disabled={!form.college_id}
+        >
+          <option value="">Select Department</option>
+          {filteredDepartments.map((d) => (
+            <option key={d.id} value={d.id}>
+              {d.name} ({d.code})
             </option>
           ))}
         </select>

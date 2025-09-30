@@ -5,6 +5,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { menuConfig } from "../../config/menuConfig";
 import logo from "/logo.png";
 import api from "../../utils/api"; // ✅ axios instance
+import { useAuth } from "../../pages/Auth/AuthContext";
 
 export default function Sidebar({
   sidebarOpen,
@@ -13,6 +14,7 @@ export default function Sidebar({
   setCollapsed,
   userRole,
 }) {
+  const { logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,12 +27,8 @@ export default function Sidebar({
       console.error("Logout failed", err);
     }
 
-    // Clear stored user session
-    localStorage.removeItem("token");
-    localStorage.removeItem("roles");
-    localStorage.removeItem("user");
-
-    // Redirect to login
+    // clear both backend + frontend session
+    logout();
     navigate("/login", { replace: true });
   };
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   FaUserGraduate,
   FaBook,
@@ -16,11 +17,9 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  LineChart,
-  Line,
 } from "recharts";
 import StatCard from "../../../components/StatCard/StatCard";
-import { mockAcademicData } from "../../../data/mockAcademicData";
+import api from "../../../utils/api";
 
 const COLORS = [
   "#52a4b0",
@@ -33,78 +32,42 @@ const COLORS = [
 ];
 
 export default function AdminDashboard() {
-  let totalStudents = 0,
-    totalCourses = 0,
-    totalExams = 0,
-    totalDepartments = 0;
+  const [colleges, setColleges] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
-  // ====== Collect Stats ======
-  const collegeStats = mockAcademicData.map((college) => {
-    let collegeStudents = 0,
-      collegeCourses = 0,
-      collegeExams = 0;
-
-    college.departments.forEach((dept) => {
-      totalDepartments++;
-      dept.semesters.forEach((sem) => {
-        totalStudents += sem.students.length;
-        totalCourses += sem.courses.length;
-        totalExams += sem.exams.length;
-
-        collegeStudents += sem.students.length;
-        collegeCourses += sem.courses.length;
-        collegeExams += sem.exams.length;
-      });
-    });
-
-    return {
-      name: college.name,
-      students: collegeStudents,
-      courses: collegeCourses,
-      exams: collegeExams,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resCol = await api.get("/colleges");
+        const resDept = await api.get("/departments");
+        setColleges(resCol.data);
+        setDepartments(resDept.data);
+      } catch (err) {
+        console.error("Failed to load dashboard data", err);
+      }
     };
-  });
+    fetchData();
+  }, []);
 
-  // ====== Department Level Data ======
-  const deptStats = [];
-  mockAcademicData.forEach((college) => {
-    college.departments.forEach((dept) => {
-      let deptStudents = 0;
-      dept.semesters.forEach((sem) => {
-        deptStudents += sem.students.length;
-      });
-      deptStats.push({
-        name: `${college.name.split(" ")[0]} - ${dept.name}`,
-        students: deptStudents,
-      });
-    });
-  });
+  // ====== Totals ======
+  const totalColleges = colleges.length;
+  const totalDepartments = departments.length;
+  // later replace with student & course APIs
+  const totalStudents = 0;
+  const totalCourses = 0;
+  const totalExams = 0;
 
-  // ====== Exams per Month (fake month distribution) ======
-  const examsPerMonth = [
-    { month: "Jan", exams: 12 },
-    { month: "Feb", exams: 18 },
-    { month: "Mar", exams: 25 },
-    { month: "Apr", exams: 15 },
-    { month: "May", exams: 20 },
-    { month: "Jun", exams: 10 },
-  ];
+  // ====== Students per College Pie Chart ======
+  const collegeStats = colleges.map((c) => ({
+    name: c.name,
+    students: c.total_students || 0, // backend should send student count later
+  }));
 
-  // ====== Top 5 Colleges ======
-  const topColleges = [...collegeStats]
-    .sort((a, b) => b.students - a.students)
-    .slice(0, 5);
-
-  // ====== Upcoming Exams ====== (flatten first, then pick top 5 earliest)
-  let upcomingExams = [];
-  mockAcademicData.forEach((college) =>
-    college.departments.forEach((dept) =>
-      dept.semesters.forEach((sem) => {
-        upcomingExams.push(...sem.exams);
-      })
-    )
-  );
-  upcomingExams = upcomingExams.slice(0, 5);
+  // ====== Departments per College Bar Chart ======
+  const deptStats = colleges.map((c) => ({
+    name: c.name,
+    departments: departments.filter((d) => d.college_id === c.id).length,
+  }));
 
   return (
     <div className="p-6 min-h-screen bg-[var(--background-color)] space-y-8">
@@ -112,6 +75,18 @@ export default function AdminDashboard() {
 
       {/* ====== Stat Cards ====== */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatCard
+          icon={<FaUsers />}
+          label="Colleges"
+          value={totalColleges}
+          color="text-green-600"
+        />
+        <StatCard
+          icon={<FaUsers />}
+          label="Departments"
+          value={totalDepartments}
+          color="text-green-500"
+        />
         <StatCard
           icon={<FaUserGraduate />}
           label="Total Students"
@@ -129,12 +104,6 @@ export default function AdminDashboard() {
           label="Total Exams"
           value={totalExams}
           color="text-red-500"
-        />
-        <StatCard
-          icon={<FaUsers />}
-          label="Departments"
-          value={totalDepartments}
-          color="text-green-500"
         />
       </div>
 
@@ -165,88 +134,21 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* ====== Department Students Bar Chart ====== */}
+      {/* ====== Departments per College Bar Chart ====== */}
       <div className="bg-white p-6 rounded-lg shadow-sm">
         <h2 className="text-lg font-semibold mb-4 text-center">
-          Students per Department
+          Departments per College
         </h2>
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={deptStats}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" hide />
+              <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="students" fill="#52a4b0" />
+              <Bar dataKey="departments" fill="#52a4b0" />
             </BarChart>
           </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* ====== Exams per Month Line Chart ====== */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4 text-center">
-          Exams per Month
-        </h2>
-        <div className="w-full h-72">
-          <ResponsiveContainer>
-            <LineChart data={examsPerMonth}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Line type="monotone" dataKey="exams" stroke="#a78bfa" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* ====== Summary Tables ====== */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Top Colleges */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-lg font-semibold mb-4">
-            Top 5 Colleges by Students
-          </h2>
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="p-3">College</th>
-                <th className="p-3">Students</th>
-              </tr>
-            </thead>
-            <tbody>
-              {topColleges.map((c, i) => (
-                <tr key={i} className="border-b">
-                  <td className="p-3">{c.name}</td>
-                  <td className="p-3">{c.students}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Upcoming Exams */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-lg font-semibold mb-4">Upcoming Exams</h2>
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="p-3">Course</th>
-                <th className="p-3">Date</th>
-                <th className="p-3">Room</th>
-              </tr>
-            </thead>
-            <tbody>
-              {upcomingExams.map((exam, i) => (
-                <tr key={i} className="border-b">
-                  <td className="p-3">{exam.course}</td>
-                  <td className="p-3">{exam.date}</td>
-                  <td className="p-3">{exam.room}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

@@ -40,15 +40,17 @@ class SuperClerkController extends Controller
             'employee_id' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
             'college_id' => 'required|exists:colleges,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
 
-        $temp = 'temp@' . Str::random(6);
+        $temp = 'temp@2026';
 
         $user = User::create([
             'name' => $req->name,
             'employee_id' => $req->employee_id,
             'email' => $req->email,
             'college_id' => $req->college_id,
+            'department_id' => $req->department_id,
             'password' => Hash::make($temp),
             'must_change_password' => true,
             'is_active' => true,
@@ -59,7 +61,7 @@ class SuperClerkController extends Controller
         return response()->json([
             'message' => 'Employee created successfully',
             'temp_password' => $temp,
-            'user' => $user->load('college')
+            'user' => $user->load(['college', 'department'])
         ]);
     }
 }

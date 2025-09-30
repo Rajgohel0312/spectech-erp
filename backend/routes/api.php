@@ -42,6 +42,11 @@ Route::middleware(['auth:sanctum', 'role:admin|superClerk|superAccountant', 'act
     Route::post('colleges', [CollegeController::class, 'store']); // keep Admin only
     Route::put('colleges/{college}', [CollegeController::class, 'update']); // Admin only
     Route::delete('colleges/{college}', [CollegeController::class, 'destroy']); // Admin only
+
+    Route::get('departments', [DepartmentController::class, 'index']);
+    Route::post('departments', [DepartmentController::class, 'store']);
+    Route::put('departments/{department}', [DepartmentController::class, 'update']);
+    Route::delete('departments/{department}', [DepartmentController::class, 'destroy']);
 });
 
 // 📂 Super Clerk Routes
