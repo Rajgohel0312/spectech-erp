@@ -40,6 +40,7 @@ import ProtectedRoute from "./pages/Auth/ProtectedRoute";
 import { useAuth } from "./pages/Auth/AuthContext";
 import AddStore from "./pages/UserManagement/Admin/AddStore";
 import AddLabAssistant from "./pages/UserManagement/Admin/AddLabAssistant";
+import ManageLeaveBalance from "./pages/LeaveManagement/ManageLeaveBalance";
 
 function App() {
   const { roles } = useAuth();
@@ -163,6 +164,10 @@ function App() {
             <Route
               path="/user-management/add-lab-assistant"
               element={<AddLabAssistant />}
+            />
+            <Route
+              path="/manage-leave-balance"
+              element={<ManageLeaveBalance />}
             />
           </Route>
         </Route>

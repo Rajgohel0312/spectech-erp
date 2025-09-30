@@ -167,6 +167,12 @@ export const menuConfig = [
         roles: ["superClerk"],
       },
       {
+        path: "/manage-leave-balance", // ✅ new
+        label: "Manage Leave Balances",
+        icon: <FaClipboardList />, // you can swap icon if you like
+        roles: ["superClerk", "admin"], // ✅ both superClerk & admin
+      },
+      {
         path: "/reports",
         label: "Reports",
         icon: <FaFileAlt />,

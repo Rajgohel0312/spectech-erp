@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\LeaveBalanceController;
+use App\Http\Controllers\LeaveController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
@@ -38,7 +40,11 @@ Route::middleware(['auth:sanctum', 'role:admin', 'active'])->group(function () {
     Route::post('admin/create-lab-assistant', [AdminController::class, 'createLabAssistant']);
 
 });
-
+Route::middleware(['auth:sanctum', 'role:admin|superClerk', 'active'])->group(function () {
+    Route::post('leave-balance/{employeeId}', [LeaveBalanceController::class, 'storeOrUpdate']);
+    Route::put('leave-balance/{employeeId}', [LeaveBalanceController::class, 'storeOrUpdate']);
+    Route::get('admin/users', [AdminController::class, 'listUsers']);
+});
 Route::middleware(['auth:sanctum', 'role:admin|superClerk|superAccountant', 'active'])->group(function () {
     // Colleges
     Route::get('colleges', [CollegeController::class, 'index']);
@@ -66,4 +72,18 @@ Route::middleware(['auth:sanctum', 'role:superAccountant', 'active'])->group(fun
 // 🎓 Clerk Routes (import students)
 Route::middleware(['auth:sanctum', 'role:clerk', 'active'])->group(function () {
     Route::post('clerk/import-students', [ClerkController::class, 'importStudents']);
+});
+
+
+Route::middleware(['auth:sanctum', 'role:employee|faculty', 'active'])->group(function () {
+    Route::post('leaves/apply', [LeaveController::class, 'apply']);
+    Route::get('leaves/history', [LeaveController::class, 'history']);
+
+    Route::get('leave-balance', [LeaveBalanceController::class, 'show']);
+    Route::put('leave-balance', [LeaveBalanceController::class, 'update']);
+});
+
+// Clerk / SuperClerk routes
+Route::middleware(['auth:sanctum', 'role:clerk|superClerk', 'active'])->group(function () {
+    Route::put('leaves/status/{id}', [LeaveController::class, 'updateStatus']);
 });
